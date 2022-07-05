@@ -1,0 +1,31 @@
+{% extends 'portfolio/base.html' %}
+
+<!-- Инициализация блока -->
+
+{% block content %}
+<div align="center">
+  <div id="centerLayer">
+<h1>This is blog</h1>
+
+<h2>Я написал {{ blogs.count }} постов<h2>
+
+<!-- Колво постов. blogs.count|pluralize - исправление окончания. Только для английского блять иди ты нахуй -->
+
+
+{% for blog in blogs %}
+
+<a href="{% url 'blog:detail' blog.id %}"><h2>{{ blog.title }}</h2></a>
+<p>{{ blog.description|safe|truncatechars:35 }}</p>
+
+<!-- |safe|truncatechars - ограничение символов -->
+
+<h5>{{ blog.date|date:'M d Y' }}</h5>
+
+<!-- django template date format тут короче разные приколы с форматирование времени -->
+
+{% endfor %}
+
+</div>
+</div>
+
+{% endblock %}
